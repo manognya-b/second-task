@@ -31,8 +31,11 @@ class TaskManager:
         """
         This method writes the list of tasks to a file
         """
-        pass
-
+        with open('output.txt', 'w') as file:
+            for index, task in enumerate(self.tasks, start=1):
+                status = "Completed" if task.completed else "Pending"
+                file.write(f"{index}. {task.description} - {status}\n")
+        
 def main():
     task_manager = TaskManager()
 
@@ -42,6 +45,7 @@ def main():
         print("2. View Tasks")
         print("3. Mark Task as Completed")
         print("4. Exit")
+        print("5. Export tasks as file")
 
         choice = input("Enter your choice: ")
 
@@ -57,6 +61,8 @@ def main():
         elif choice == "4":
             print("Exiting program.")
             break
+        elif choice == "5":
+            task_manager.write_tasks()
         else:
             print("Invalid choice. Please try again.")
 
